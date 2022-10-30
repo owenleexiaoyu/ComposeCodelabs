@@ -31,6 +31,16 @@
         <activity android:name=".chapter1.AddComposeToViewActivity" />
         <activity android:name=".chapter1.AddViewToComposeActivity" />
         <activity android:name=".chapter1.AddXMLViewToComposeActivity" />
+        <activity android:name=".chapter2.Chapter2Activity" />
+        <activity android:name=".chapter2.ModifierDemoActivity" />
+        <activity android:name=".chapter2.MatchParentSizeActivity" />
+        <activity android:name=".chapter2.TextDemoActivity" />
+        <activity android:name=".chapter2.TextFieldDemoActivity" />
+        <activity android:name=".chapter2.ImageDemoActivity" />
+        <activity android:name=".chapter2.ButtonDemoActivity" />
+        <activity android:name=".chapter2.CheckboxDemoActivity" />
+        <activity android:name=".chapter2.DialogDemoActivity" />
+        <activity android:name=".chapter2.ProgressIndicatorDemoActivity" />
     </application>
 
 </manifest>
