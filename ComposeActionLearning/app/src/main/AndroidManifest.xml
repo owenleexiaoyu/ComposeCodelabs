@@ -41,6 +41,10 @@
         <activity android:name=".chapter2.CheckboxDemoActivity" />
         <activity android:name=".chapter2.DialogDemoActivity" />
         <activity android:name=".chapter2.ProgressIndicatorDemoActivity" />
+        <activity android:name=".chapter2.LayoutComponentDemoActivity" />
+        <activity android:name=".chapter2.ConstraintLayoutDemoActivity" />
+        <activity android:name=".chapter2.ScaffoldDemoActivity" />
+        <activity android:name=".chapter2.ListDemoActivity" />
     </application>
 
 </manifest>

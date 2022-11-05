@@ -50,6 +50,18 @@ fun Chapter2Page() {
             ItemButton(text = "ProgressIndicator Demo") {
                 context.startActivity(Intent(context, ProgressIndicatorDemoActivity::class.java))
             }
+            ItemButton(text = "LayoutComponent Demo") {
+                context.startActivity(Intent(context, LayoutComponentDemoActivity::class.java))
+            }
+            ItemButton(text = "ConstraintLayout Demo") {
+                context.startActivity(Intent(context, ConstraintLayoutDemoActivity::class.java))
+            }
+            ItemButton(text = "Scaffold Demo") {
+                context.startActivity(Intent(context, ScaffoldDemoActivity::class.java))
+            }
+            ItemButton(text = "LazyColumn Demo") {
+                context.startActivity(Intent(context, ListDemoActivity::class.java))
+            }
         }
     }
 }
