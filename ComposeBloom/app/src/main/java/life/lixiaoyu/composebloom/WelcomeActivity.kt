@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.UiMode
 import androidx.compose.ui.unit.dp
 import life.lixiaoyu.composebloom.ui.theme.BloomTheme
+import life.lixiaoyu.composebloom.ui.theme.welcomeAssets
 
 class WelcomeActivity : ComponentActivity() {
 
@@ -40,7 +41,7 @@ fun WelcomePage() {
         .background(MaterialTheme.colors.primary)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_light_welcome_bg),
+            painter = painterResource(id = MaterialTheme.welcomeAssets.background),
             "Background of welcome page",
             modifier = Modifier.fillMaxSize()
         )
@@ -53,7 +54,7 @@ fun WelcomeContent() {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         VerticalSpacer(height = 72.dp)
         Image(
-            painter = painterResource(id = R.drawable.ic_light_welcome_illos),
+            painter = painterResource(id = MaterialTheme.welcomeAssets.illos),
             "Illos of welcome page",
             modifier = Modifier
                 .wrapContentSize()
@@ -61,7 +62,7 @@ fun WelcomeContent() {
         )
         VerticalSpacer(height = 48.dp)
         Image(
-            painter = painterResource(id = R.drawable.ic_light_logo),
+            painter = painterResource(id = MaterialTheme.welcomeAssets.logo),
             "Logo of welcome page",
             modifier = Modifier
                 .wrapContentSize()
