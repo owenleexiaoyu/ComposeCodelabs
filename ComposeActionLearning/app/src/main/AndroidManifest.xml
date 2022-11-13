@@ -31,6 +31,7 @@
         <activity android:name=".chapter1.AddComposeToViewActivity" />
         <activity android:name=".chapter1.AddViewToComposeActivity" />
         <activity android:name=".chapter1.AddXMLViewToComposeActivity" />
+
         <activity android:name=".chapter2.Chapter2Activity" />
         <activity android:name=".chapter2.ModifierDemoActivity" />
         <activity android:name=".chapter2.MatchParentSizeActivity" />
@@ -45,6 +46,9 @@
         <activity android:name=".chapter2.ConstraintLayoutDemoActivity" />
         <activity android:name=".chapter2.ScaffoldDemoActivity" />
         <activity android:name=".chapter2.ListDemoActivity" />
+
+        <activity android:name=".chapter3.Chapter3Activity" />
+        <activity android:name=".chapter3.CompositionLocalDemoActivity" />
     </application>
 
 </manifest>

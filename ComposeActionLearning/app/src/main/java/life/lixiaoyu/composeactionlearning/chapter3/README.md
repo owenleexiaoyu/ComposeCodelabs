@@ -1,1 +1,1 @@
-这一章节的项目代码在：ComposeBloom 中。
+这一章节的 Bloom 项目代码在：ComposeBloom 中。
