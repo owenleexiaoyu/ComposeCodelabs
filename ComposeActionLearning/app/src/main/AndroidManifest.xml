@@ -49,6 +49,21 @@
 
         <activity android:name=".chapter3.Chapter3Activity" />
         <activity android:name=".chapter3.CompositionLocalDemoActivity" />
+
+        <activity android:name=".chapter4.Chapter4Activity" />
+        <activity android:name=".chapter4.CounterActivity" />
+        <activity android:name=".chapter4.Counter2Activity" />
+        <activity android:name=".chapter4.Counter3Activity" />
+        <activity android:name=".chapter4.Counter4Activity" />
+        <activity android:name=".chapter4.Counter5Activity" />
+        <activity android:name=".chapter4.Counter6Activity" />
+        <activity android:name=".chapter4.Counter7Activity" />
+        <activity android:name=".chapter4.ShowSnakeBarActivity"/>
+        <activity android:name=".chapter4.RememberSavableActivity" />
+        <activity android:name=".chapter4.CompositionDemoActivity"/>
+        <activity android:name=".chapter4.AsyncCompositionActivity" />
+        <activity android:name=".chapter4.CompositionScopeActivity" />
+        <activity android:name=".chapter4.SideEffectsTimerDemoActivity" />
     </application>
 
 </manifest>

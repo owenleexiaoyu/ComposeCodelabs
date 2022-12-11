@@ -44,10 +44,17 @@
         <entry key="../../../../../../layout/compose-model-1667497147677.xml" value="0.10277777777777777" />
         <entry key="../../../../../../layout/compose-model-1667743990814.xml" value="0.26309121621621623" />
         <entry key="../../../../../../layout/compose-model-1668298792271.xml" value="0.1" />
+        <entry key="../../../../../../layout/compose-model-1668390634527.xml" value="0.335" />
+        <entry key="../../../../../../layout/compose-model-1668392423045.xml" value="0.13724662162162163" />
+        <entry key="../../../../../../layout/compose-model-1668392822081.xml" value="0.13809121621621623" />
+        <entry key="../../../../../../layout/compose-model-1668440304958.xml" value="0.13724662162162163" />
+        <entry key="../../../../../../layout/compose-model-1668652506445.xml" value="0.26309121621621623" />
+        <entry key="../../../../../../layout/compose-model-1668851968695.xml" value="0.2622466216216216" />
         <entry key="app/src/main/res/drawable/ic_konglong.xml" value="0.138" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.138" />
         <entry key="app/src/main/res/drawable/ic_star.xml" value="0.138" />
         <entry key="app/src/main/res/layout/activity_add_compose_to_view.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_counter.xml" value="0.14270833333333333" />
         <entry key="app/src/main/res/layout/layout_xml_view_to_compose.xml" value="0.19610507246376813" />
       </map>
     </option>

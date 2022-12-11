@@ -6,26 +6,50 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowRight
+import androidx.compose.material.icons.filled.ArrowRightAlt
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import life.lixiaoyu.composeactionlearning.ui.theme.ComposeActionLearningTheme
 
 @Composable
 fun ItemButton(text: String, onClick: () -> Unit) {
-    Button(
+//    Button(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(horizontal = 12.dp, vertical = 2.dp),
+//        onClick = onClick,
+//        contentPadding = PaddingValues(vertical = 10.dp)
+//    ) {
+//        Text(text = text)
+//    }
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 2.dp),
-        onClick = onClick,
-        contentPadding = PaddingValues(vertical = 10.dp)
+            .height(50.dp)
+            .clickable {
+                onClick()
+            }
     ) {
-        Text(text = text)
+        Row(
+            modifier = Modifier
+                .weight(1F)
+                .padding(vertical = 5.dp, horizontal = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = text, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Spacer(modifier = Modifier.weight(1F))
+            Icon(Icons.Filled.ChevronRight, "", modifier = Modifier.size(20.dp))
+        }
+        Divider(modifier = Modifier.padding(horizontal = 10.dp))
     }
 }
 
