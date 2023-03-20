@@ -12,6 +12,7 @@ import life.lixiaoyu.composeactionlearning.chapter1.Chapter1Activity
 import life.lixiaoyu.composeactionlearning.chapter2.Chapter2Activity
 import life.lixiaoyu.composeactionlearning.chapter3.Chapter3Activity
 import life.lixiaoyu.composeactionlearning.chapter4.Chapter4Activity
+import life.lixiaoyu.composeactionlearning.chapter5.Chapter5Activity
 import life.lixiaoyu.composeactionlearning.ui.theme.ComposeActionLearningTheme
 
 class MainActivity : ComponentActivity() {
@@ -40,6 +41,9 @@ fun MainPage() {
         }
         ItemButton(text = "Chapter 4") {
             context.startActivity(Intent(context, Chapter4Activity::class.java))
+        }
+        ItemButton(text = "Chapter 5") {
+            context.startActivity(Intent(context, Chapter5Activity::class.java))
         }
     }
 }

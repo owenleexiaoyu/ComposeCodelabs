@@ -82,7 +82,6 @@ fun TimerNavigation() {
 fun SideEffectsTimerHomePage(navController: NavController) {
 
     Column {
-        val context = LocalContext.current
         ItemButton(text = Page.LaunchedEffect.name) {
             navController.navigate(Page.LaunchedEffect.name)
         }
