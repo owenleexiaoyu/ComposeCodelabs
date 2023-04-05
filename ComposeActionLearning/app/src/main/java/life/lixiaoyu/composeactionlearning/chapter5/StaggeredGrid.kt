@@ -22,6 +22,8 @@ import java.util.*
 import kotlin.math.max
 
 /**
+ * https://www.jianshu.com/p/0eae1ed46b6f
+ * https://www.cnblogs.com/minminjy123/p/15089519.html
  * 三行的横向滑动瀑布流
  */
 
@@ -32,15 +34,26 @@ fun StaggeredGrid(
     content: @Composable () -> Unit,
 ) {
     Layout(modifier = modifier, content = content) { measurables, constrints ->
+        /**
+         * 第 1 步
+         */
+        // 保存每行的宽度
         val rowsWidth = IntArray(rows){0}
+        // 保存每行的高度
         val rowsHeight = IntArray(rows){0}
         val placeables = measurables.mapIndexed { index, measurable ->
             val placeable = measurable.measure(constrints)
+            // 这个子组件在哪一行
             val rowIndex = index % rows
+            // 每行的宽度是这一行上所有子组件宽度的和
             rowsWidth[rowIndex] += placeable.width
+            // 每行的高度是这一行上子组件高度的最大值
             rowsHeight[rowIndex] = max(rowsHeight[rowIndex], placeable.height)
             placeable
         }
+        /**
+         * 第 2 步
+         */
         // width 取三行中宽度最大的值，与 constraints 的 minWidth 和 maxWidth 比较，
         // 在 minWidth 和 maxWidth 之间，返回 width，否则是 minWidth 或 maxWidth
         val width = rowsWidth.maxOrNull()
@@ -48,6 +61,9 @@ fun StaggeredGrid(
             ?: constrints.minWidth
         // height 取三行高度之和，与 constraints minHeight 和 maxHeight 比较
         val height = rowsHeight.sum().coerceIn(constrints.minHeight.rangeTo(constrints.maxHeight))
+        /**
+         * 第 3 步
+         */
         // 计算每行元素在 Y 轴上的坐标
         val rowY = IntArray(rows) {0}
         for (i in 1 until rows) {

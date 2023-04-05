@@ -43,6 +43,9 @@ fun Chapter5NavHost() {
         composable(Chapter5Pages.staggeredGrid.name) {
             StaggeredGridPage()
         }
+        composable(Chapter5Pages.flowLayout.name) {
+            FlowLayoutPageDemo()
+        }
         composable(Chapter5Pages.twoTexts.name) {
             TwoTextsPage()
         }
@@ -75,6 +78,7 @@ enum class Chapter5Pages {
     firstBaselineToTop,
     customColumn,
     staggeredGrid,
+    flowLayout,
     twoTexts,
     customIntrinsicSizeRow,
     subcomposeLayoutTwoTexts,
@@ -97,6 +101,9 @@ fun Chapter5Page(navController: NavController) {
         }
         ItemButton(text = "自定义布局 StaggeredGrid") {
             navController.navigate(Chapter5Pages.staggeredGrid.name)
+        }
+        ItemButton(text = "自定义布局 FlowLayout") {
+            navController.navigate(Chapter5Pages.flowLayout.name)
         }
         ItemButton(text = "Row 固有特性测量： TwoTextDivider") {
             navController.navigate(Chapter5Pages.twoTexts.name)
