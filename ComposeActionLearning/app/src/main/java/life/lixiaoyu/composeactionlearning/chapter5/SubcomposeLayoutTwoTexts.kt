@@ -38,8 +38,8 @@ fun SubcomposeLayoutTwoTextsPage() {
                 .padding(end = 5.dp)
                 .wrapContentWidth(Alignment.End)
         )
-    }) {
-        val heightDp = with(LocalDensity.current) { it.toDp() }
+    }) { height ->
+        val heightDp = with(LocalDensity.current) { height.toDp() }
         Divider(color = Color.Black, modifier = Modifier
             .width(2.dp)
             .height(heightDp)
