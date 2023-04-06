@@ -34,6 +34,22 @@ fun Chapter9NavHost() {
         composable(Chapter9Pages.chapter9.name) {
             Chapter9Page(navController)
         }
+        composable(Chapter9Pages.systemUiContriller.name) {
+            SystemUiControllerDemoPage()
+        }
+        // Pager 相关页面
+        composable(Chapter9Pages.pager.name) {
+            PagerDemoPage(navController)
+        }
+        composable(Chapter9Pages.pager_basic.name) {
+            PagerBasicDemoPage()
+        }
+        composable(Chapter9Pages.pager_indicator.name) {
+            PagerIndicatorDemoPage()
+        }
+        composable(Chapter9Pages.pager_tabLayout.name) {
+            PagerTabLayoutDemoPage()
+        }
         composable(Chapter9Pages.coil.name) {
             CoilDemoPage()
         }
@@ -42,16 +58,25 @@ fun Chapter9NavHost() {
 
 enum class Chapter9Pages {
     chapter9,
+    systemUiContriller,
+    pager,
+    pager_basic,
+    pager_indicator,
+    pager_tabLayout,
     coil,
 }
 
 @Composable
 fun Chapter9Page(navController: NavController) {
     Column {
+        ItemButton(text = "SystemUiController Demo") {
+            navController.navigate(Chapter9Pages.systemUiContriller.name)
+        }
+        ItemButton(text = "Pager Demo") {
+            navController.navigate(Chapter9Pages.pager.name)
+        }
         ItemButton(text = "Coil Demo") {
             navController.navigate(Chapter9Pages.coil.name)
         }
-
-
     }
 }
