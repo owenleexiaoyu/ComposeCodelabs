@@ -50,6 +50,9 @@ fun Chapter9NavHost() {
         composable(Chapter9Pages.pager_tabLayout.name) {
             PagerTabLayoutDemoPage()
         }
+        composable(Chapter9Pages.pull_refresh.name) {
+            PullRefreshDemoPage()
+        }
         composable(Chapter9Pages.coil.name) {
             CoilDemoPage()
         }
@@ -63,6 +66,7 @@ enum class Chapter9Pages {
     pager_basic,
     pager_indicator,
     pager_tabLayout,
+    pull_refresh,
     coil,
 }
 
@@ -74,6 +78,9 @@ fun Chapter9Page(navController: NavController) {
         }
         ItemButton(text = "Pager Demo") {
             navController.navigate(Chapter9Pages.pager.name)
+        }
+        ItemButton(text = "PullRefresh Demo") {
+            navController.navigate(Chapter9Pages.pull_refresh.name)
         }
         ItemButton(text = "Coil Demo") {
             navController.navigate(Chapter9Pages.coil.name)

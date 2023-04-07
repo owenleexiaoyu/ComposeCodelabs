@@ -22,15 +22,6 @@ import life.lixiaoyu.composeactionlearning.ui.theme.ComposeActionLearningTheme
 
 @Composable
 fun ItemButton(text: String, onClick: () -> Unit) {
-//    Button(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(horizontal = 12.dp, vertical = 2.dp),
-//        onClick = onClick,
-//        contentPadding = PaddingValues(vertical = 10.dp)
-//    ) {
-//        Text(text = text)
-//    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
