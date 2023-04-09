@@ -1,21 +1,26 @@
 package life.lixiaoyu.composeactionlearning.chapter9
 
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.PullRefreshState
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -53,6 +58,11 @@ fun PullRefreshDemoPage() {
                 modifier = Modifier.align(Alignment.TopCenter),
                 contentColor = Purple200
             )
+//            GlowIndicator(
+//                refreshing = refreshing,
+//                pullRefreshState = pullRefreshState,
+//                refreshTriggerDistance = 20.dp
+//            )
         }
     }
 }
@@ -73,6 +83,50 @@ class MyViewModel: ViewModel() {
             delay(2000L)
             dataList.add(0, "新添加的 Item")
             isRefreshing.value = false
+        }
+    }
+}
+
+/**
+ * A custom indicator which displays a glow and progress indicator
+ */
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun GlowIndicator(
+    refreshing: Boolean,
+    pullRefreshState: PullRefreshState,
+    refreshTriggerDistance: Dp,
+    color: Color = MaterialTheme.colors.primary,
+) {
+    Box(
+        Modifier
+            .drawWithCache {
+                onDrawBehind {
+                    val distance = refreshTriggerDistance.toPx()
+                    val progress = (pullRefreshState.progress / distance).coerceIn(0f, 1f)
+                    // We draw a translucent glow
+                    val brush = Brush.verticalGradient(
+                        0f to color.copy(alpha = 0.45f),
+                        1f to color.copy(alpha = 0f)
+                    )
+                    // And fade the glow in/out based on the swipe progress
+                    drawRect(brush = brush, alpha = FastOutSlowInEasing.transform(progress))
+                }
+            }
+            .fillMaxWidth()
+            .height(72.dp)
+    ) {
+        if (refreshing) {
+            // If we're refreshing, show an indeterminate progress indicator
+            LinearProgressIndicator(Modifier.fillMaxWidth())
+        } else {
+            // Otherwise we display a determinate progress indicator with the current swipe progress
+            val trigger = with(LocalDensity.current) { refreshTriggerDistance.toPx() }
+            val progress = (pullRefreshState.progress / trigger).coerceIn(0f, 1f)
+            LinearProgressIndicator(
+                progress = progress,
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
     }
 }

@@ -1,10 +1,12 @@
 package life.lixiaoyu.composeactionlearning.chapter9
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -81,6 +83,10 @@ fun Chapter9Page(navController: NavController) {
         }
         ItemButton(text = "PullRefresh Demo") {
             navController.navigate(Chapter9Pages.pull_refresh.name)
+        }
+        val context = LocalContext.current
+        ItemButton(text = "Insets Demo") {
+            context.startActivity(Intent(context, InsetsDemoActivity::class.java))
         }
         ItemButton(text = "Coil Demo") {
             navController.navigate(Chapter9Pages.coil.name)
