@@ -19,23 +19,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.UiMode
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import life.lixiaoyu.composebloom.ui.theme.BloomTheme
 import life.lixiaoyu.composebloom.ui.theme.welcomeAssets
 
-class WelcomeActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            BloomTheme {
-                WelcomePage()
-            }
-        }
-    }
-}
-
 @Composable
-fun WelcomePage() {
+fun WelcomePage(navController: NavController) {
     Box(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colors.primary)
@@ -45,12 +35,12 @@ fun WelcomePage() {
             "Background of welcome page",
             modifier = Modifier.fillMaxSize()
         )
-        WelcomeContent()
+        WelcomeContent(navController)
     }
 }
 
 @Composable
-fun WelcomeContent() {
+fun WelcomeContent(navController: NavController) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         VerticalSpacer(height = 72.dp)
         Image(
@@ -102,7 +92,7 @@ fun WelcomeContent() {
         val context = LocalContext.current
         TextButton(
             onClick = {
-                context.startActivity(Intent(context, LoginActivity::class.java))
+                navController.navigate("login")
             }
         ) {
             Text(
@@ -119,6 +109,7 @@ fun WelcomeContent() {
 @Composable
 fun WelcomePagePreview() {
     BloomTheme {
-        WelcomePage()
+        val navController = rememberNavController()
+        WelcomePage(navController)
     }
 }

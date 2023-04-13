@@ -22,6 +22,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import life.lixiaoyu.composebloom.ui.theme.BloomTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,14 +33,30 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BloomTheme {
-                HomePage()
+                AppNavigation()
             }
         }
     }
 }
 
 @Composable
-fun HomePage() {
+fun AppNavigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "welcome") {
+        composable("welcome") {
+            WelcomePage(navController = navController)
+        }
+        composable("login") {
+            LoginPage(navController = navController)
+        }
+        composable("home") {
+            HomePage(navController = navController)
+        }
+    }
+}
+
+@Composable
+fun HomePage(navController: NavController) {
     Scaffold(
         bottomBar = {
             BottomBar()
@@ -304,6 +324,7 @@ fun SearchBar() {
 @Composable
 fun DefaultPreview() {
     BloomTheme {
-        HomePage()
+        val navController = rememberNavController()
+        HomePage(navController)
     }
 }

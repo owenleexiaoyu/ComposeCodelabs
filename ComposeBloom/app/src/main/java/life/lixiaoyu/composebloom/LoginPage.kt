@@ -2,9 +2,6 @@ package life.lixiaoyu.composebloom
 
 import android.content.Intent
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -19,23 +16,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import life.lixiaoyu.composebloom.TextUtils.withStyle
 import life.lixiaoyu.composebloom.ui.theme.BloomTheme
 
-class LoginActivity: ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            BloomTheme {
-                LoginPage()
-            }
-        }
-    }
-}
-
 @Composable
-fun LoginPage() {
+fun LoginPage(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,7 +38,9 @@ fun LoginPage() {
         OutlinedTextField(
             value = "",
             onValueChange = {},
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             placeholder = {
                 Text(
                     "Email address",
@@ -64,7 +53,9 @@ fun LoginPage() {
         OutlinedTextField(
             value = "",
             onValueChange = {},
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             placeholder = {
                 Text(
                     "Password(8+ characters)",
@@ -79,7 +70,7 @@ fun LoginPage() {
         val context = LocalContext.current
         Button(
             onClick = {
-                context.startActivity(Intent(context, MainActivity::class.java))
+                navController.navigate("home")
             },
             modifier = Modifier
                 .height(48.dp)
@@ -145,6 +136,7 @@ fun HintWithUnderline() {
 @Composable
 fun LoginPagePreview() {
     BloomTheme {
-        LoginPage()
+        val navController = rememberNavController()
+        LoginPage(navController)
     }
 }
