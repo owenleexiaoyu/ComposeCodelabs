@@ -1,4 +1,4 @@
-package life.lixiaoyu.composebloom
+package life.lixiaoyu.composebloom.ui
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

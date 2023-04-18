@@ -1,4 +1,4 @@
-package life.lixiaoyu.composebloom
+package life.lixiaoyu.composebloom.util
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ParagraphStyle

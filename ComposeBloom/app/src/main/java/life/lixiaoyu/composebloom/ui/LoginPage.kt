@@ -1,6 +1,5 @@
-package life.lixiaoyu.composebloom
+package life.lixiaoyu.composebloom.ui
 
-import android.content.Intent
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -9,20 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import life.lixiaoyu.composebloom.TextUtils.withStyle
+import life.lixiaoyu.composebloom.util.TextUtils.withStyle
 import life.lixiaoyu.composebloom.ui.theme.BloomTheme
 
 @Composable
-fun LoginPage(navController: NavController) {
+fun LoginPage(
+    onLoginClicked: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -67,10 +65,9 @@ fun LoginPage(navController: NavController) {
         VerticalSpacer(height = 8.dp)
         HintWithUnderline()
         VerticalSpacer(height = 16.dp)
-        val context = LocalContext.current
         Button(
             onClick = {
-                navController.navigate("home")
+                onLoginClicked.invoke()
             },
             modifier = Modifier
                 .height(48.dp)
@@ -136,7 +133,6 @@ fun HintWithUnderline() {
 @Composable
 fun LoginPagePreview() {
     BloomTheme {
-        val navController = rememberNavController()
-        LoginPage(navController)
+        LoginPage()
     }
 }
