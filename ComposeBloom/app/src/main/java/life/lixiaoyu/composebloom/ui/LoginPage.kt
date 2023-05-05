@@ -1,10 +1,6 @@
-package life.lixiaoyu.composebloom
+package life.lixiaoyu.composebloom.ui
 
-import android.content.Intent
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -12,30 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import life.lixiaoyu.composebloom.TextUtils.withStyle
+import life.lixiaoyu.composebloom.util.TextUtils.withStyle
 import life.lixiaoyu.composebloom.ui.theme.BloomTheme
 
-class LoginActivity: ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            BloomTheme {
-                LoginPage()
-            }
-        }
-    }
-}
-
 @Composable
-fun LoginPage() {
+fun LoginPage(
+    onLoginClicked: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,7 +36,9 @@ fun LoginPage() {
         OutlinedTextField(
             value = "",
             onValueChange = {},
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             placeholder = {
                 Text(
                     "Email address",
@@ -64,7 +51,9 @@ fun LoginPage() {
         OutlinedTextField(
             value = "",
             onValueChange = {},
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             placeholder = {
                 Text(
                     "Password(8+ characters)",
@@ -76,10 +65,9 @@ fun LoginPage() {
         VerticalSpacer(height = 8.dp)
         HintWithUnderline()
         VerticalSpacer(height = 16.dp)
-        val context = LocalContext.current
         Button(
             onClick = {
-                context.startActivity(Intent(context, MainActivity::class.java))
+                onLoginClicked.invoke()
             },
             modifier = Modifier
                 .height(48.dp)
