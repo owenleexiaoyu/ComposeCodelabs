@@ -43,8 +43,8 @@ fun CoilDemo() {
                 .size(400)
                 .build(),
             contentDescription = "Network Image",
-            placeholder = painterResource(id = R.mipmap.ic_loading),
-            error = painterResource(id = R.mipmap.ic_error),
+            placeholder = painterResource(id = R.drawable.ic_loading),
+            error = painterResource(id = R.drawable.ic_error),
             onSuccess = {
                 Log.d("Compose_Coil", "AsyncImage onSuccess")
             },
