@@ -27,6 +27,8 @@ enum class Chapter7Pages {
     clickable,
     draggableAndSwipeable,
     transformable,
+    scrollable,
+    nestedScroll,
 }
 
 @Composable
@@ -45,6 +47,12 @@ fun Chapter7Navigation() {
         composable(Chapter7Pages.transformable.name) {
             TransformablePage()
         }
+        composable(Chapter7Pages.scrollable.name) {
+            ScrollablePage()
+        }
+        composable(Chapter7Pages.nestedScroll.name) {
+            NestedScrollPage()
+        }
     }
 }
 
@@ -60,6 +68,12 @@ fun Chapter6Page(navController: NavController) {
             }
             ItemButton(text = "Transformable") {
                 navController.navigate(Chapter7Pages.transformable.name)
+            }
+            ItemButton(text = "Scrollable") {
+                navController.navigate(Chapter7Pages.scrollable.name)
+            }
+            ItemButton(text = "NestedScroll") {
+                navController.navigate(Chapter7Pages.nestedScroll.name)
             }
         }
     }
