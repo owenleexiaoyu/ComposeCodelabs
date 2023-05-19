@@ -1,5 +1,6 @@
 package life.lixiaoyu.composeactionlearning.chapter7
 
+import android.content.ClipData
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,6 +30,8 @@ enum class Chapter7Pages {
     transformable,
     scrollable,
     nestedScroll,
+    detectTapGestures,
+    detectDragGestures,
 }
 
 @Composable
@@ -53,6 +56,12 @@ fun Chapter7Navigation() {
         composable(Chapter7Pages.nestedScroll.name) {
             NestedScrollPage()
         }
+        composable(Chapter7Pages.detectTapGestures.name) {
+            DetectTapGesturesPage()
+        }
+        composable(Chapter7Pages.detectDragGestures.name) {
+            DetectDragGesturesPage()
+        }
     }
 }
 
@@ -74,6 +83,12 @@ fun Chapter6Page(navController: NavController) {
             }
             ItemButton(text = "NestedScroll") {
                 navController.navigate(Chapter7Pages.nestedScroll.name)
+            }
+            ItemButton(text = "DetectTapGestures") {
+                navController.navigate(Chapter7Pages.detectTapGestures.name)
+            }
+            ItemButton(text = "DetectDragGestures") {
+                navController.navigate(Chapter7Pages.detectDragGestures.name)
             }
         }
     }
