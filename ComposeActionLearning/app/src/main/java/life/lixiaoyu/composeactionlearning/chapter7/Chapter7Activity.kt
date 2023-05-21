@@ -5,7 +5,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,6 +35,8 @@ enum class Chapter7Pages {
     nestedScroll,
     detectTapGestures,
     detectDragGestures,
+    detectTransformGestures,
+    awaitPointerEvent,
 }
 
 @Composable
@@ -62,13 +67,19 @@ fun Chapter7Navigation() {
         composable(Chapter7Pages.detectDragGestures.name) {
             DetectDragGesturesPage()
         }
+        composable(Chapter7Pages.detectTransformGestures.name) {
+            DetectTransformGesturesPage()
+        }
+        composable(Chapter7Pages.awaitPointerEvent.name) {
+            AwaitPointerEventPage()
+        }
     }
 }
 
 @Composable
 fun Chapter6Page(navController: NavController) {
     FullPageWrapper {
-        Column {
+        Column(Modifier.verticalScroll(rememberScrollState())) {
             ItemButton(text = "Clickable") {
                 navController.navigate(Chapter7Pages.clickable.name)
             }
@@ -89,6 +100,12 @@ fun Chapter6Page(navController: NavController) {
             }
             ItemButton(text = "DetectDragGestures") {
                 navController.navigate(Chapter7Pages.detectDragGestures.name)
+            }
+            ItemButton(text = "DetectTransformGestures") {
+                navController.navigate(Chapter7Pages.detectTransformGestures.name)
+            }
+            ItemButton(text = "AwaitPointerEvent") {
+                navController.navigate(Chapter7Pages.awaitPointerEvent.name)
             }
         }
     }
