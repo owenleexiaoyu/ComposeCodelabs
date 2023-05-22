@@ -2,6 +2,7 @@ package life.lixiaoyu.composetetris
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -11,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
@@ -19,7 +21,12 @@ fun Tetris() {
     val tetrisViewModel = viewModel<TetrisViewModel>()
     val viewState = tetrisViewModel.viewState.value
 
+    // 设置沉浸式系统状态栏和导航栏
+    val systemUiController = rememberSystemUiController()
+    val useDarkIcons = !isSystemInDarkTheme()
+
     LaunchedEffect(key1 = Unit) {
+        systemUiController.setSystemBarsColor(color = Color.Yellow, darkIcons = useDarkIcons)
         while (isActive) {
             delay(650L)
             tetrisViewModel.dispatch(Action.GameTick)
