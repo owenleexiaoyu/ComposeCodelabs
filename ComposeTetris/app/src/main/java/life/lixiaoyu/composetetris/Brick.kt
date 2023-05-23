@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
+import life.lixiaoyu.composetetris.model.Sprite
 import kotlin.math.min
 
 /**
@@ -48,19 +49,20 @@ fun DrawScope.drawMatrix(
     }
 }
 
-fun DrawScope.drawBricks(
-
-) {
-
-}
 fun DrawScope.drawSprite(
     sprite: Sprite,
     brickSize: Float,
     matrix: Pair<Int, Int>
 ) {
     clipRect(0F, 0F, matrix.first * brickSize, matrix.second * brickSize) {
-        sprite.location.forEach {
-            drawBrick(brickSize, it, Color.Black)
+        val shape = sprite.getShape()
+        for (i in 0 until Sprite.SIZE) {
+            for (j in 0 until Sprite.SIZE) {
+                val value = shape[i][j]
+                if (value == 1) {
+                    drawBrick(brickSize, Offset(sprite.offset.x + i, sprite.offset.y + j), Color.Black)
+                }
+            }
         }
     }
 }
