@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -58,13 +59,13 @@ fun GameBody(clickable: Clickable) {
                     modifier = Modifier.align(Alignment.TopCenter),
                     size = 60.dp,
                     onClick = {
-                        clickable.onMove(Direction.UP)
+                        clickable.onRotate()
                     }
                 ) {
                     Icon(
-                        Icons.Default.KeyboardArrowUp,
-                        "Up",
-                        modifier = it.size(60.dp),
+                        Icons.Default.Refresh,
+                        "Rotate",
+                        modifier = it.size(40.dp),
                         tint = Color.White
                     )
                 }
@@ -112,15 +113,13 @@ fun GameBody(clickable: Clickable) {
                 }
             }
             GameButton(size = 100.dp, onClick = {
-                clickable.onRotate()
+                clickable.onDrop()
             }) {
-                Text(
-                    text = "ROTATE",
-                    modifier = it,
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center,
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_speed_down),
+                    "Speed Down",
+                    modifier = it.size(40.dp),
+                    tint = Color.White
                 )
             }
         }

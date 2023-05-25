@@ -73,11 +73,7 @@ fun Tetris() {
         ) {
             GameBody(Clickable(
                 onMove = {direction: Direction ->
-                    if (direction == Direction.UP) {
-                        tetrisViewModel.dispatch(Action.Drop)
-                    } else {
-                        tetrisViewModel.dispatch(Action.Move(direction))
-                    }
+                    tetrisViewModel.dispatch(Action.Move(direction))
                 },
                 onMute = {
                     tetrisViewModel.dispatch(Action.Mute)
@@ -90,6 +86,9 @@ fun Tetris() {
                 },
                 onRotate = {
                     tetrisViewModel.dispatch(Action.Rotate)
+                },
+                onDrop = {
+                    tetrisViewModel.dispatch(Action.Drop)
                 }
             ))
         }
