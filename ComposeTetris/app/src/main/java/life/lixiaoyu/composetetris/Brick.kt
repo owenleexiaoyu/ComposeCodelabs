@@ -40,11 +40,15 @@ private fun DrawScope.drawBrick(
 
 fun DrawScope.drawMatrix(
     brickSize: Float,
-    matrix: Pair<Int, Int>
+    matrix: Array<IntArray>
 ) {
-    (0 until matrix.first).forEach { x ->
-        (0 until matrix.second).forEach { y ->
-            drawBrick(brickSize, Offset(x.toFloat(), y.toFloat()), Color.LightGray)
+    val width = matrix[0].size
+    val height = matrix.size
+    // 注意这里 i 表示矩阵中第 i 行，j 表示矩阵中第 j 列，和 Offset 的 x，y 正好相反
+    for (i in 0 until height) {
+        for (j in 0 until width) {
+            val brickColor = if (matrix[i][j] == 1) Color.Black else Color.LightGray
+            drawBrick(brickSize, Offset(j.toFloat(), i.toFloat()), brickColor)
         }
     }
 }
@@ -76,8 +80,9 @@ fun BrickMatrix(
         modifier = modifier,
         onDraw = {
             val matrix = viewState.matrix
-            val brickSize = min(size.width / matrix.first, size.height / matrix.second)
+            val matrixSize = matrix[0].size to matrix.size
+            val brickSize = min(size.width / matrixSize.first, size.height / matrixSize.second)
             drawMatrix(brickSize, matrix)
-            drawSprite(viewState.sprite, brickSize, matrix)
+            drawSprite(viewState.sprite, brickSize, matrixSize)
         })
 }

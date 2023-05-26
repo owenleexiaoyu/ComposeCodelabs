@@ -57,11 +57,14 @@ fun Tetris() {
                         viewState
                     )
                     Spacer(modifier = Modifier.width(10.dp))
-                    ScoreBoard(modifier = Modifier
+                    ScoreBoard(
+                        modifier = Modifier
                         .fillMaxHeight()
                         .weight(1F)
                         .aspectRatio(0.25F)
-                        .border(0.5F.dp, Color.White))
+                        .border(0.5F.dp, Color.White),
+                        viewState = viewState
+                    )
                 }
 
             }

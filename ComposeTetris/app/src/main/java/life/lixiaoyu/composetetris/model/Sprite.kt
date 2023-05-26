@@ -2,6 +2,7 @@ package life.lixiaoyu.composetetris.model
 
 import android.util.Log
 import androidx.compose.ui.geometry.Offset
+import kotlin.math.roundToInt
 
 
 data class Sprite(
@@ -23,18 +24,23 @@ data class Sprite(
     /**
      * 判断一个 Sprite 是否在矩阵中
      */
-    fun isValidInMatrix(matrix: Pair<Int, Int>): Boolean {
+    fun isValidInMatrix(matrix: Array<IntArray>): Boolean {
+        val height = matrix.size
+        val width = matrix[0].size
         val shape = getShape()
         for (i in 0 until SIZE) {
             for (j in 0 until SIZE) {
                 val value = shape[i][j]
                 if (value == 1) {
-                    val offsetX = offset.x + i
-                    if (offsetX < 0 || offsetX >= matrix.first) {
+                    val offsetX = (offset.x + i).roundToInt()
+                    if (offsetX < 0 || offsetX >= width) {
                         return false
                     }
-                    val offsetY = offset.y + j
-                    if (offsetY < 0 || offsetY >= matrix.second) {
+                    val offsetY = (offset.y + j).roundToInt()
+                    if (offsetY < 0 || offsetY >= height) {
+                        return false
+                    }
+                    if (matrix[offsetY][offsetX] == 1) {
                         return false
                     }
                 }
@@ -43,9 +49,24 @@ data class Sprite(
         return true
     }
 
+    fun addToMatrix(matrix: Array<IntArray>): Array<IntArray> {
+        val shape = getShape()
+        for (i in 0 until SIZE) {
+            for (j in 0 until SIZE) {
+                val value = shape[i][j]
+                if (value == 1) {
+                    val offsetX = (offset.x + i).roundToInt()
+                    val offsetY = (offset.y + j).roundToInt()
+                    matrix[offsetY][offsetX] = 1
+                }
+            }
+        }
+        return matrix
+    }
+
     companion object {
         const val SIZE = 4        // 每个 Sprite 都是 4×4 矩阵
-        const val TYPE_COUNT = 7  // 一共有 7 中 Sprite
+        const val TYPE_COUNT = 7  // 一共有 7 种 Sprite
 
         val Empty: Sprite = Sprite()
     }

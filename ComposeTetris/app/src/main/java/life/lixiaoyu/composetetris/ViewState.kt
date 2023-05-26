@@ -25,6 +25,15 @@ class TetrisViewModel : ViewModel() {
                 val updatedSprite = curSprite.moveBy(action.direction.toOffset())
                 if (updatedSprite.isValidInMatrix(_viewState.value.matrix)) {
                     emit(_viewState.value.copy(sprite = updatedSprite))
+                } else if (action.direction == Direction.DOWN) {
+                    // 如果方向是向下，然后不能再往下了，说明和 Matrix 中已有的 brick 碰撞了
+                    val newMatrix = _viewState.value.matrix.copyOf()
+                    val nextSprite = generateRandomSprite()
+                    emit(_viewState.value.copy(
+                        matrix = curSprite.addToMatrix(newMatrix),
+                        sprite = _viewState.value.nextSprite,
+                        nextSprite = nextSprite
+                    ))
                 }
             }
             Action.Rotate -> {
@@ -35,11 +44,12 @@ class TetrisViewModel : ViewModel() {
                 }
             }
             Action.GameTick -> {
-                val curSprite = _viewState.value.sprite
-                val updatedSprite = curSprite.moveBy(Direction.DOWN.toOffset())
-                if (updatedSprite.isValidInMatrix(_viewState.value.matrix)) {
-                    emit(_viewState.value.copy(sprite = updatedSprite))
-                }
+                dispatch(Action.Move(direction = Direction.DOWN))
+//                val curSprite = _viewState.value.sprite
+//                val updatedSprite = curSprite.moveBy(Direction.DOWN.toOffset())
+//                if (updatedSprite.isValidInMatrix(_viewState.value.matrix)) {
+//                    emit(_viewState.value.copy(sprite = updatedSprite))
+//                }
             }
             else -> {}
         }
@@ -70,7 +80,7 @@ data class ViewState(
     val bricks: List<Brick> = emptyList(),
     val sprite: Sprite = Sprite.Empty,
     val nextSprite: Sprite = Sprite.Empty,
-    val matrix: Pair<Int, Int> = MatrixWidth to MatrixHeight,
+    val matrix: Array<IntArray> = Array(MatrixHeight) { IntArray(MatrixWidth) },
     val gameStatus: GameStatus = GameStatus.OnBoard,
     val score: Int = 0,
 )
