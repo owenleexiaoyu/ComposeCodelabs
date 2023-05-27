@@ -40,7 +40,7 @@ fun GameBody(clickable: Clickable) {
                 clickable.onMute()
             })
             GameBar(title = "PAUSE/RESUME", onClick = {
-                clickable.onPause()
+                clickable.onPauseOrResume()
             })
             GameBar(title = "START/RESET", onClick = {
                 clickable.onRestart()

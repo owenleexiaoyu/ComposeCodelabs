@@ -1,7 +1,11 @@
 package life.lixiaoyu.composetetris
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -9,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import life.lixiaoyu.composetetris.model.Sprite
 import kotlin.math.min
 
@@ -38,6 +44,9 @@ private fun DrawScope.drawBrick(
     )
 }
 
+/**
+ * 绘制矩阵
+ */
 fun DrawScope.drawMatrix(
     brickSize: Float,
     matrix: Array<IntArray>
@@ -47,12 +56,15 @@ fun DrawScope.drawMatrix(
     // 注意这里 i 表示矩阵中第 i 行，j 表示矩阵中第 j 列，和 Offset 的 x，y 正好相反
     for (i in 0 until height) {
         for (j in 0 until width) {
-            val brickColor = if (matrix[i][j] == 1) Color.Black else Color.LightGray
+            val brickColor = if (matrix[i][j] == 1) Color.Black else Color(0xFF878C77)
             drawBrick(brickSize, Offset(j.toFloat(), i.toFloat()), brickColor)
         }
     }
 }
 
+/**
+ * 绘制砖块
+ */
 fun DrawScope.drawSprite(
     sprite: Sprite,
     brickSize: Float,
@@ -74,15 +86,33 @@ fun DrawScope.drawSprite(
 @Composable
 fun BrickMatrix(
     modifier: Modifier = Modifier,
-    viewState: ViewState
+    viewState: ViewState,
 ) {
-    Canvas(
-        modifier = modifier,
-        onDraw = {
-            val matrix = viewState.matrix
-            val matrixSize = matrix[0].size to matrix.size
-            val brickSize = min(size.width / matrixSize.first, size.height / matrixSize.second)
-            drawMatrix(brickSize, matrix)
-            drawSprite(viewState.sprite, brickSize, matrixSize)
-        })
+    Box(modifier = modifier) {
+        if (viewState.gameStatus == GameStatus.OnBoard) {
+            Text(
+                "TETRIS",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.Center)
+            )
+        } else if (viewState.gameStatus == GameStatus.GameOver) {
+            Text(
+                text = "GAME OVER!",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.Center)
+            )
+        } else {
+            Canvas(
+                modifier = Modifier.fillMaxSize(),
+                onDraw = {
+                    val matrix = viewState.matrix
+                    val matrixSize = matrix[0].size to matrix.size
+                    val brickSize = min(size.width / matrixSize.first, size.height / matrixSize.second)
+                    drawMatrix(brickSize, matrix)
+                    drawSprite(viewState.sprite, brickSize, matrixSize)
+                })
+        }
+    }
 }

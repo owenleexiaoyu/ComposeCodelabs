@@ -8,7 +8,7 @@ data class Clickable(
     val onDrop: () -> Unit,
     val onRotate: () -> Unit,
     val onRestart: () -> Unit,
-    val onPause: () -> Unit,
+    val onPauseOrResume: () -> Unit,
     val onMute: () -> Unit
 )
 

@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,10 +43,15 @@ fun Tetris() {
                 .weight(2F)
         ) {
             Box(modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .aspectRatio(3 / 4F)
+                .align(Alignment.Center)
                 .padding(30.dp)
                 .border(3.dp, Color.Black, shape = RoundedCornerShape(4.dp))
+                .clip(RoundedCornerShape(4.dp))
+                .background(Color(0xFFA1AC8A))
                 .padding(10.dp)
+
             ) {
                 Row(
                     modifier = Modifier.fillMaxSize()
@@ -53,20 +60,19 @@ fun Tetris() {
                         modifier = Modifier
                             .fillMaxHeight()
                             .weight(2F)
-                            .aspectRatio(0.5F),
+                            .aspectRatio(0.5F)
+                            .border(2.dp, Color.DarkGray),
                         viewState
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     ScoreBoard(
                         modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(1F)
-                        .aspectRatio(0.25F)
-                        .border(0.5F.dp, Color.White),
+                            .fillMaxHeight()
+                            .weight(1F)
+                            .aspectRatio(0.25F),
                         viewState = viewState
                     )
                 }
-
             }
         }
         Box(
@@ -81,8 +87,12 @@ fun Tetris() {
                 onMute = {
                     tetrisViewModel.dispatch(Action.Mute)
                 },
-                onPause = {
-                    tetrisViewModel.dispatch(Action.Pause)
+                onPauseOrResume = {
+                    if (viewState.isRunning) {
+                        tetrisViewModel.dispatch(Action.Pause)
+                    } else if (viewState.isPaused) {
+                        tetrisViewModel.dispatch(Action.Resume)
+                    }
                 },
                 onRestart = {
                     tetrisViewModel.dispatch(Action.Reset)

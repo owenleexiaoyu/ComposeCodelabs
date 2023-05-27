@@ -2,10 +2,11 @@ package life.lixiaoyu.composetetris.model
 
 import android.util.Log
 import androidx.compose.ui.geometry.Offset
+import life.lixiaoyu.composetetris.MatrixWidth
 import kotlin.math.roundToInt
 
 
-data class Sprite(
+open class Sprite(
     val shapeType: SpriteShape = EmptySpriteShape,
     val offset: Offset = Offset.Zero,
     val rotation: Int = 0, // 旋转次数，范围是 0~3
@@ -64,11 +65,32 @@ data class Sprite(
         return matrix
     }
 
+    fun copy(
+        offset: Offset = this.offset,
+        rotation: Int = this.rotation
+    ): Sprite {
+        return Sprite(this.shapeType, offset, rotation)
+    }
+
     companion object {
         const val SIZE = 4        // 每个 Sprite 都是 4×4 矩阵
         const val TYPE_COUNT = 7  // 一共有 7 种 Sprite
 
-        val Empty: Sprite = Sprite()
+        val Empty: Sprite = object : Sprite() {}
+
+        private val spriteList = listOf(
+            Sprite(shapeType = SpriteZ, offset = Offset((MatrixWidth / 2).toFloat(), 0F)),
+            Sprite(shapeType = SpriteN, offset = Offset((MatrixWidth / 2).toFloat(), 0F)),
+            Sprite(shapeType = SpriteI, offset = Offset((MatrixWidth / 2).toFloat(), 0F)),
+            Sprite(shapeType = SpriteT, offset = Offset((MatrixWidth / 2).toFloat(), 0F)),
+            Sprite(shapeType = SpriteO, offset = Offset((MatrixWidth / 2).toFloat(), 0F)),
+            Sprite(shapeType = SpriteL, offset = Offset((MatrixWidth / 2).toFloat(), 0F)),
+            Sprite(shapeType = SpriteJ, offset = Offset((MatrixWidth / 2).toFloat(), 0F)),
+        )
+
+        fun generateRandomSprite(): Sprite {
+            return spriteList.shuffled()[0]
+        }
     }
 }
 
@@ -92,7 +114,7 @@ object SpriteZ : SpriteShape {
     )
 
     override fun getShape(rotation: Int): Array<IntArray> {
-        Log.d("OWEN", "SpriteZ getShape call")
+//        Log.d("OWEN", "SpriteZ getShape call")
         return if (rotation % 2 == 0) {
             defaultShape
         } else {
@@ -114,7 +136,7 @@ object SpriteN : SpriteShape {
         intArrayOf(0, 0, 0, 0),
     )
     override fun getShape(rotation: Int): Array<IntArray> {
-        Log.d("OWEN", "SpriteN getShape call")
+//        Log.d("OWEN", "SpriteN getShape call")
         return if (rotation % 2 == 0) {
             defaultShape
         } else {
@@ -136,7 +158,7 @@ object SpriteI : SpriteShape {
         intArrayOf(0, 0, 0, 0),
     )
     override fun getShape(rotation: Int): Array<IntArray> {
-        Log.d("OWEN", "SpriteI getShape call")
+//        Log.d("OWEN", "SpriteI getShape call")
         return if (rotation % 2 == 0) {
             defaultShape
         } else {
@@ -158,7 +180,7 @@ object SpriteT : SpriteShape {
         intArrayOf(0, 0, 0, 0),
     )
     override fun getShape(rotation: Int): Array<IntArray> {
-        Log.d("OWEN", "SpriteT getShape call")
+//        Log.d("OWEN", "SpriteT getShape call")
         return when (rotation) {
             1 -> arrayOf(
                 intArrayOf(1, 0, 0, 0),
@@ -191,7 +213,7 @@ object SpriteO : SpriteShape {
         intArrayOf(0, 0, 0, 0),
     )
     override fun getShape(rotation: Int): Array<IntArray> {
-        Log.d("OWEN", "SpriteO getShape call")
+//        Log.d("OWEN", "SpriteO getShape call")
         return defaultShape
     }
 }
@@ -204,7 +226,7 @@ object SpriteL : SpriteShape {
         intArrayOf(0, 0, 0, 0),
     )
     override fun getShape(rotation: Int): Array<IntArray> {
-        Log.d("OWEN", "SpriteL getShape call")
+//        Log.d("OWEN", "SpriteL getShape call")
         return when (rotation) {
             1 -> arrayOf(
                 intArrayOf(1, 0, 0, 0),
@@ -237,7 +259,7 @@ object SpriteJ : SpriteShape {
         intArrayOf(0, 0, 0, 0),
     )
     override fun getShape(rotation: Int): Array<IntArray> {
-        Log.d("OWEN", "SpriteJ getShape call")
+//        Log.d("OWEN", "SpriteJ getShape call")
         return when (rotation) {
             1 -> arrayOf(
                 intArrayOf(1, 1, 0, 0),
