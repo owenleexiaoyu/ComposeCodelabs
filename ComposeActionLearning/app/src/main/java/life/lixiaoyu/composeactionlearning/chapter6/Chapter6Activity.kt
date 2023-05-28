@@ -35,6 +35,7 @@ enum class Chapter6Pages {
     animationSpec,
     skeletonAnimation,
     collectionAnimation,
+    dynamicIsland,
 }
 
 @Composable
@@ -77,6 +78,9 @@ fun Chapter6Navigation() {
         composable(Chapter6Pages.collectionAnimation.name) {
             CollectionAnimationPage()
         }
+        composable(Chapter6Pages.dynamicIsland.name) {
+            DynamicIslandPage()
+        }
     }
 }
 
@@ -116,6 +120,9 @@ fun Chapter6Page(navController: NavController) {
             }
             ItemButton(text = "动画实战：收藏按钮动画") {
                 navController.navigate(Chapter6Pages.collectionAnimation.name)
+            }
+            ItemButton(text = "动画实战：灵动岛动画") {
+                navController.navigate(Chapter6Pages.dynamicIsland.name)
             }
         }
     }
